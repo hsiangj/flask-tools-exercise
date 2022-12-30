@@ -23,7 +23,11 @@ def handle_question():
   """Save answer to list and redirect to next question."""
   answer = request.form['answer']
   responses.append(answer)
-  return redirect(f'/questions/{len(responses)}') 
+
+  if(len(responses) == len(survey.questions)):
+    return redirect('/complete')
+  else:
+    return redirect(f'/questions/{len(responses)}')
   
 @app.route('/questions/<int:question_id>', methods = ['POST'])
 def question_page(question_id):
@@ -31,5 +35,9 @@ def question_page(question_id):
   question = survey.questions[question_id]
   choices = survey.questions[question_id].choices
   return render_template('questions.html', question=question, question_id=question_id, choices=choices)
+
+@app.route('/complete')
+def complete():
+  return render_template('complete.html')
 
   
