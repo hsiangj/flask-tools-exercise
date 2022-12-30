@@ -30,6 +30,6 @@ def question_page(question_id):
   """Display current question."""
   question = survey.questions[question_id]
   choices = survey.questions[question_id].choices
-  return render_template('questions.html', question=question, choices=choices)
+  return render_template('questions.html', question=question, question_id=question_id, choices=choices)
 
   
